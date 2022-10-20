@@ -28,12 +28,12 @@ section {
 	margin-bottom:25px;
 	font-weight:700;
 	font-size:1.4rem;
-	margin-bottom:27px;
+	margin-bottom:15px;
 }
 .section-title span {
 	border-bottom:1px solid rgba(0,0,0,.44);
 	display:inline-block;
-	padding-bottom:20px;
+	padding-bottom:15px;
 	margin-bottom:-1px;
 }
 @media (min-width:576px) {
@@ -50,7 +50,7 @@ section {
 	}
 }
 .card-columns .card {
-	margin-bottom:20px;
+	margin-bottom:10px;
 }
 .listfeaturedtag .wrapthumbnail {
 	height:258px;
