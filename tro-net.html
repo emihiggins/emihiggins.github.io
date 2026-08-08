@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>tro-net.com — Founder · Emalia Higgins</title>
+  <meta name="description" content="tro-net.com — a scam and phishing email checker built for people 60 and up. Founded, designed, and built end-to-end by Emalia Higgins." />
+
+  <meta property="og:title" content="tro-net.com — Founder · Emalia Higgins" />
+  <meta property="og:description" content="A scam and phishing email checker built for people 60 and up. Built for parents. Shared with everyone." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <div class="layout">
+
+      <!-- ─────────────────────────  SIDEBAR NAV  ───────────────────────── -->
+      <aside class="sidebar">
+        <a class="brand" href="index.html" aria-label="Back to portfolio">
+          <span class="brand-dot" aria-hidden="true"></span>
+          Emalia Higgins
+        </a>
+        <p class="sidebar-role">Founder · tro-net.com</p>
+        <nav class="side-nav" aria-label="On this page">
+          <a href="#top">Overview</a>
+          <a href="#how">How it works</a>
+          <a href="#design">Design principles</a>
+          <a href="#safety">Safety</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#stack">Stack</a>
+        </nav>
+        <div class="sidebar-social">
+          <a href="index.html">← Portfolio</a>
+          <a href="https://tro-net.com" target="_blank" rel="noopener">tro-net.com ↗</a>
+        </div>
+      </aside>
+
+      <!-- ─────────────────────────  CONTENT  ───────────────────────── -->
+      <main id="main" class="content">
+        <section class="bento" id="top">
+
+          <!-- ── HERO ── -->
+          <article class="card card--hero span-4">
+            <img class="proj-logo proj-logo--lg" src="assets/tro-net-logo.png" alt="tro-net logo" width="96" height="96" />
+            <span class="eyebrow">Founder · Solo build</span>
+            <h1 class="hero-title">
+              <span class="hl">tro-net.com</span> — a scam &amp; phishing
+              email checker built for people 60 and up.
+            </h1>
+            <p class="hero-sub">
+              My parents kept forwarding me suspicious emails asking "is this real?"
+              The answer shouldn't depend on whether their daughter picks up the phone.
+              So I designed and built tro-net end to end — product, safety engineering,
+              billing, and the business behind it.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="https://tro-net.com" target="_blank" rel="noopener">Visit tro-net.com ↗</a>
+              <a class="btn btn--ghost" href="index.html#projects">← Back to portfolio</a>
+            </div>
+          </article>
+
+          <!-- ═══════════════  HOW IT WORKS  ═══════════════ -->
+          <h2 class="section-head span-4" id="how">How it works</h2>
+
+          <article class="card span-2 row-2">
+            <h2 class="card-kicker">The problem</h2>
+            <p class="card-body">
+              Modern phishing emails are well-written, well-designed, and
+              disproportionately target older adults. The old advice —
+              "look for spelling mistakes" — no longer works.
+            </p>
+            <p class="card-body">
+              When someone's parent gets an email that looks like it's from their bank,
+              they either guess, call their kids, or click. tro-net gives them a
+              trustworthy fourth option.
+            </p>
+          </article>
+
+          <article class="card card--tint-lav span-2">
+            <h2 class="card-kicker">The reply they get back</h2>
+            <p class="card-body">
+              Forward any email to a personal address like
+              <code>u_1234@mail.tro-net.com</code> and, within minutes, get back:
+            </p>
+            <div class="verdict-demo" role="img" aria-label="Verdict options: safe, suspicious (highlighted), likely scam">
+              <span class="verdict-pill verdict-pill--safe">Safe</span>
+              <span class="verdict-pill verdict-pill--sus is-on">Suspicious</span>
+              <span class="verdict-pill verdict-pill--scam">Likely scam</span>
+            </div>
+          </article>
+
+          <article class="card span-2">
+            <h2 class="card-kicker">What's in the reply</h2>
+            <ul class="feature-list">
+              <li><strong>A one-word verdict</strong><span>Safe, suspicious, or likely scam — rendered large and high-contrast.</span></li>
+              <li><strong>Two or three plain-English reasons</strong><span>So users build intuition over time instead of just being told what to think.</span></li>
+              <li><strong>Verified contact details</strong><span>If it impersonates a real company, the real phone &amp; website — looked up server-side from a curated allowlist, never taken from the suspicious email.</span></li>
+            </ul>
+          </article>
+
+          <!-- ═══════════════  DESIGN PRINCIPLES  ═══════════════ -->
+          <h2 class="section-head span-4" id="design">Design principles</h2>
+          <article class="card span-4">
+            <p class="lede">
+              The audience is 60+ and skeptical of unfamiliar technology — often because
+              of the scams they've already encountered. Every product decision is filtered
+              through that.
+            </p>
+            <ul class="feature-list measure">
+              <li><strong>No jargon, anywhere the user can see</strong><span>The words "AI", "algorithm", "model", and any vendor name are absent from every user-facing surface. Plain language only: "we read the email and tell you."</span></li>
+              <li><strong>Trust-first writing</strong><span>The FAQ opens with "Will you read all of my emails?" and "Will you ever ask me for my password?" — privacy questions come before feature questions.</span></li>
+              <li><strong>Big type, big tap targets, generous spacing</strong><span>Oversized body copy, every phone number a <code>tel:</code> link, high contrast throughout.</span></li>
+              <li><strong>The product will never call the user — ever</strong><span>That promise is baked into the code and the outreach program. Even institutional outreach is scoped to senior centers and libraries, never end users — because calling individuals would violate the exact behavior we're teaching people to distrust.</span></li>
+            </ul>
+          </article>
+
+          <!-- ═══════════════  SAFETY INVARIANTS  ═══════════════ -->
+          <h2 class="section-head span-4" id="safety">Safety invariants, enforced in code</h2>
+          <article class="card span-2 row-2">
+            <h2 class="card-kicker">Contact details can't leak</h2>
+            <p class="card-body">
+              The classifier is <strong>structurally incapable</strong> of surfacing a phone
+              number. It emits an organization slug (<code>wells-fargo</code>); a server-side
+              resolver looks that slug up in a curated allowlist and attaches verified contact
+              details. A runtime "belt" (<code>stripForbiddenContact</code>) drops any
+              phone- or URL-shaped string from model output before it renders — and if every
+              reason gets stripped, the system falls back to a hedged verdict telling the user
+              to look the company up themselves.
+            </p>
+          </article>
+          <article class="card span-2">
+            <h2 class="card-kicker">Cached "safe" must be earned</h2>
+            <p class="card-body">
+              The verdict cache only serves a <em>safe</em> result when the original check ran
+              with high confidence. Below that floor, the cache is a miss and the classifier
+              re-runs.
+            </p>
+          </article>
+          <article class="card span-2">
+            <h2 class="card-kicker">Hostile input by default</h2>
+            <p class="card-body">
+              Forwarded content is wrapped in <code>&lt;untrusted_body&gt;</code> tags with
+              explicit prompt-injection defenses; invisible Unicode is stripped; input is
+              length-capped to prevent token-bill DoS. The sender allowlist is always
+              enforcing — a leaked forwarding address is useless to a third party — and every
+              outbound email passes a single gate enforcing RFC 3834 loop prevention,
+              suppression lookups, and per-thread reply caps.
+            </p>
+          </article>
+
+          <!-- ═══════════════  ARCHITECTURE  ═══════════════ -->
+          <h2 class="section-head span-4" id="architecture">Architecture</h2>
+          <article class="card span-2 row-2">
+            <h2 class="card-kicker">The hot path</h2>
+            <p class="card-body">
+              From a forwarded email to a delivered verdict — an idempotent, retryable pipeline:
+            </p>
+            <ol class="steps">
+              <li><span>Inbound webhook from <strong>Postmark</strong> hands off to <strong>Inngest</strong>.</span></li>
+              <li><span>Identify user, resolve thread, persist message, check quota.</span></li>
+              <li><span>Pre-analysis gates run first — self-test detection, empty-body short-circuit, content-hash verdict cache, and signal extraction (auth headers, brand-mismatch, attachment fingerprinting). Easy cases resolve here; harder ones route to a more capable model.</span></li>
+              <li><span>The classifier runs, with model selection driven by signal strength.</span></li>
+              <li><span>The verdict is cached (only if it clears the cacheability filter), the reply is composed with proper RFC 5322 threading headers, and the outbound gate sends it.</span></li>
+            </ol>
+          </article>
+
+          <article class="card span-2" id="stack">
+            <h2 class="card-kicker">Stack</h2>
+            <ul class="chips">
+              <li>Next.js (App Router)</li><li>TypeScript</li>
+              <li>Postgres · Neon</li><li>Drizzle ORM</li>
+              <li>Inngest</li><li>Postmark</li>
+              <li>Stripe</li><li>Sentry</li>
+            </ul>
+          </article>
+
+          <article class="card card--tint-mint span-2">
+            <h2 class="card-kicker">What I built</h2>
+            <p class="card-body">
+              End to end, solo: the <strong>classifier pipeline</strong> (prompt &amp;
+              injection defenses, verdict schema, model routing, pre-analysis gates,
+              trusted-contacts allowlist, safety belts); the <strong>email machinery</strong>
+              (thread resolution, RFC 5322 threading, RFC 3834 loop prevention, suppression,
+              per-user allowlist, single outbound gate); the <strong>marketing site</strong>
+              written for the 60+ audience; <strong>billing &amp; accounts</strong> (Stripe
+              subscriptions, gifting, coupons, referral credits, click-to-cancel, admin +
+              audit log); and <strong>business ops</strong> — LLC formation, USPTO trademark
+              filing, privacy/terms drafting, and outreach to senior centers, libraries, and
+              Area Agencies on Aging.
+            </p>
+          </article>
+
+          <!-- ═══════════════  POSITIONING / CTA  ═══════════════ -->
+          <article class="card card--contact span-4">
+            <div>
+              <h2 class="contact-title">Built for parents. Shared with everyone.</h2>
+              <p class="card-body">Take a look, or forward it to someone who could use it.</p>
+            </div>
+            <div class="socials">
+              <a class="btn btn--primary" href="https://tro-net.com" target="_blank" rel="noopener">Visit tro-net.com ↗</a>
+              <a class="btn btn--ghost" href="index.html">← Back to portfolio</a>
+            </div>
+          </article>
+
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Emalia Higgins</span>
+      <span><a class="backlink" href="index.html">Portfolio</a> · <a class="backlink" href="https://tro-net.com" target="_blank" rel="noopener">tro-net.com</a></span>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

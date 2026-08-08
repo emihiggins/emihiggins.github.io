@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Private career/interview material — never publish
+ROLE-WRITEUP.md
+career/
+
+# Résumé PDF (uncomment if you don't want the PDF publicly downloadable)
+# assets/resume.pdf
+
+# Editor / OS noise
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db

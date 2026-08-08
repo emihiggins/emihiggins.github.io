@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Claude Code Token Optimizer — Emalia Higgins</title>
+  <meta name="description" content="A VS Code extension that reads local Claude Code session transcripts and recommends concrete, dollar-quantified ways to reduce LLM token spend — entirely on-device." />
+
+  <meta property="og:title" content="Claude Code Token Optimizer — Emalia Higgins" />
+  <meta property="og:description" content="A VS Code extension that surfaces dollar-quantified ways to cut Claude Code token spend, fully local." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <div class="layout">
+
+      <!-- ─────────────────────────  SIDEBAR NAV  ───────────────────────── -->
+      <aside class="sidebar">
+        <a class="brand" href="index.html" aria-label="Back to portfolio">
+          <span class="brand-dot" aria-hidden="true"></span>
+          Emalia Higgins
+        </a>
+        <p class="sidebar-role">VS Code extension</p>
+        <nav class="side-nav" aria-label="On this page">
+          <a href="#top">Overview</a>
+          <a href="#problem">The problem</a>
+          <a href="#approach">The approach</a>
+          <a href="#engineering">Engineering</a>
+          <a href="#stack">Stack</a>
+        </nav>
+        <div class="sidebar-social">
+          <a href="index.html">← Portfolio</a>
+          <a href="https://marketplace.visualstudio.com/items?itemName=side-quests.claude-code-token-optimizer" target="_blank" rel="noopener">Marketplace ↗</a>
+        </div>
+      </aside>
+
+      <!-- ─────────────────────────  CONTENT  ───────────────────────── -->
+      <main id="main" class="content">
+        <section class="bento" id="top">
+
+          <!-- ── HERO ── -->
+          <article class="card card--hero span-4">
+            <span class="eyebrow">Personal project · VS Code extension</span>
+            <div class="proj-head">
+              <img class="proj-logo" src="assets/token-optimizer-logo.png" alt="Claude Code Token Optimizer logo" width="68" height="68" />
+              <h1 class="hero-title">Claude Code <span class="hl">Token Optimizer</span></h1>
+            </div>
+            <p class="hero-sub">
+              A VS Code extension that reads local Claude Code session transcripts and
+              recommends concrete, dollar-quantified ways to reduce token spend — entirely
+              on-device.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="https://marketplace.visualstudio.com/items?itemName=side-quests.claude-code-token-optimizer" target="_blank" rel="noopener">Install from Marketplace ↗</a>
+              <a class="btn btn--ghost" href="https://github.com/emihiggins/ai-insights-ext" target="_blank" rel="noopener">Source on GitHub ↗</a>
+              <a class="btn btn--ghost" href="index.html#projects">← Back to portfolio</a>
+            </div>
+          </article>
+
+          <!-- ═══════════════  THE PROBLEM  ═══════════════ -->
+          <h2 class="section-head span-4" id="problem">The problem</h2>
+          <article class="card span-4">
+            <p class="card-body measure">
+              Coding agents like Claude Code are powerful but expensive, and the cost
+              signals are diffuse — a single session might spend $15 without any obvious
+              moment where "that read was wasteful" or "that search should have been
+              scoped." Claude Code writes every turn to a local JSONL transcript
+              (<code>~/.claude/projects/</code>), including full usage metadata — input
+              tokens, output tokens, cache reads/writes, tool calls, compactions — but
+              doesn't surface any of it. I wanted a tool that answers:
+              <strong>where is the money going, and what specifically should I do
+              differently?</strong>
+            </p>
+          </article>
+
+          <!-- ═══════════════  THE APPROACH  ═══════════════ -->
+          <h2 class="section-head span-4" id="approach">The approach</h2>
+
+          <article class="card span-2 row-2">
+            <h2 class="card-kicker">The pipeline</h2>
+            <p class="card-body">A purely-local analyzer, end to end:</p>
+            <ol class="steps">
+              <li><span>Discover every transcript under the local Claude home.</span></li>
+              <li><span>Stream &amp; parse each JSONL file into a typed session model, folding usage / tool / compaction events as it goes.</span></li>
+              <li><span>Run a rules engine — ten independent detectors, each keyed to a specific transcript pattern with an explicit token/cost estimate.</span></li>
+              <li><span>Aggregate findings into recoverable-dollar totals by category, rank the most common mistakes, and split "one-off fixes" from "habits."</span></li>
+              <li><span>Track a daily efficiency series (cache-reuse %, cost/day, compactions) persisted to storage so history survives transcript pruning — a regression banner fires only when both 7-day windows have enough data.</span></li>
+              <li><span>Drill into any expensive session: a tokens-per-turn chart with compaction points marked, plus the priciest tool calls with their exact target.</span></li>
+            </ol>
+          </article>
+
+          <article class="card card--tint-lav span-2 row-2">
+            <h2 class="card-kicker">The ten detectors</h2>
+            <ul class="list">
+              <li>Context compactions (each drops thousands of tokens and re-primes a cold cache)</li>
+              <li>Context-pressure warnings before an auto-compaction</li>
+              <li>Broad or unscoped <code>grep</code>/<code>rg</code>/<code>find</code> searches</li>
+              <li>Uncapped <code>cat</code>/<code>git diff</code>/<code>git log</code> output dumps</li>
+              <li>Oversized or repeated reads of the same file</li>
+              <li>Reading a file back immediately after writing it</li>
+              <li>Redundant read-only inspection commands</li>
+              <li>Failed/interrupted tool calls whose output was billed and discarded</li>
+              <li>Low cache reuse (a signature of volatile prompt prefixes)</li>
+              <li>High-input / low-output round-trips</li>
+            </ul>
+          </article>
+
+          <!-- ═══════════════  ENGINEERING  ═══════════════ -->
+          <h2 class="section-head span-4" id="engineering">Engineering decisions I'm proud of</h2>
+          <article class="card span-4">
+            <ul class="feature-list measure">
+              <li><strong>Data layer has no <code>vscode</code> dependency</strong><span>The parser, model, pricing, rules, and aggregation are pure TypeScript, unit-tested against fixtures and a temp <code>~/.claude</code> tree — keeping tests fast and the extension shell thin.</span></li>
+              <li><strong>Honest cost estimates</strong><span>Claude Code's local stats report <code>costUSD: 0</code>, so I built an editable rate table (Opus/Sonnet/Haiku input/output, plus cache-read at 0.1× and cache-write at 1.25–2×). Every recommendation carries a dollar figure — and the README is explicit that on an already-efficient setup recoverable waste can legitimately be small. I didn't inflate the numbers.</span></li>
+              <li><strong>Rules are one-file-each and independently testable</strong><span>Adding a new detection is dropping a file in <code>src/rules/</code> — nothing else changes.</span></li>
+              <li><strong>Regression alerts resist noise</strong><span>The trend logic requires ≥3 active sessions and ≥20k tokens per window before firing, because false alarms on sparse history are worse than missed ones.</span></li>
+              <li><strong>Fully local, fully private</strong><span>No telemetry, no external calls. Everything runs on the machine that already has the transcripts.</span></li>
+            </ul>
+          </article>
+
+          <!-- ═══════════════  STACK  ═══════════════ -->
+          <h2 class="section-head span-4" id="stack">Stack</h2>
+          <article class="card span-2">
+            <h2 class="card-kicker">Built with</h2>
+            <ul class="chips">
+              <li>TypeScript</li><li>VS Code Extension API</li><li>esbuild</li>
+              <li>Chart.js</li><li>chokidar</li><li>Node test runner</li>
+            </ul>
+          </article>
+          <article class="card card--tint-mint span-2">
+            <h2 class="card-kicker">By the numbers</h2>
+            <p class="card-body">
+              <strong>10</strong> detection rules · <strong>38</strong> unit tests ·
+              <strong>0</strong> runtime dependencies (Chart.js webview bundled at build
+              time) · <strong>0</strong> telemetry.
+            </p>
+          </article>
+
+          <!-- ── CTA ── -->
+          <article class="card card--contact span-4">
+            <div>
+              <h2 class="contact-title">Try it on your own transcripts.</h2>
+              <p class="card-body">Install from the Marketplace, or read the source.</p>
+            </div>
+            <div class="socials">
+              <a class="btn btn--primary" href="https://marketplace.visualstudio.com/items?itemName=side-quests.claude-code-token-optimizer" target="_blank" rel="noopener">VS Code Marketplace ↗</a>
+              <a class="btn btn--ghost" href="https://github.com/emihiggins/ai-insights-ext" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Emalia Higgins</span>
+      <span><a class="backlink" href="index.html">Portfolio</a></span>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
