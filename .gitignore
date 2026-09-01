@@ -9,3 +9,7 @@ node_modules/
 # Private career/interview material — never publish
 ROLE-WRITEUP.md
 career/
+
+# Maintainer notes. Nobody else updates this site, so the how-to-run-it docs
+# stay local and the public README.md is just a pointer to the live site.
+README.local.md
