@@ -1,0 +1,46 @@
+---
+import { yearMonth } from '../lib/entries';
+
+export interface Row {
+  date: Date;
+  kind?: 'proj' | 'log';
+  title: string;
+  href: string;
+  summary?: string;
+}
+
+interface Props {
+  rows: Row[];
+  /** Show the [proj] / [log] column. Off for single-collection indexes. */
+  showKind?: boolean;
+  /** Show the one-line summary under each title. */
+  showSummary?: boolean;
+  empty?: string;
+}
+
+const { rows, showKind = false, showSummary = false, empty = 'Nothing here yet.' } =
+  Astro.props;
+---
+
+{
+  rows.length === 0 ? (
+    <p class="section-label">{empty}</p>
+  ) : (
+    <ul class="entries">
+      {rows.map((row) => (
+        <li class="entry" style={!showKind ? 'grid-template-columns: 8ch 1fr' : undefined}>
+          <span class="entry-meta">
+            <time class="entry-date" datetime={row.date.toISOString()}>
+              {yearMonth(row.date)}
+            </time>
+            {showKind && row.kind && <span class="entry-kind">[{row.kind}]</span>}
+          </span>
+          <span class="entry-title">
+            <a href={row.href}>{row.title}</a>
+          </span>
+          {showSummary && row.summary && <span class="entry-summary">{row.summary}</span>}
+        </li>
+      ))}
+    </ul>
+  )
+}

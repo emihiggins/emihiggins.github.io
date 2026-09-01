@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { getPosts } from '../../lib/entries';
+
+const rows = (await getPosts()).map((p) => ({
+  date: p.data.date,
+  title: p.data.title,
+  href: `/log/${p.id}/`,
+  summary: p.data.summary,
+}));
+---
+
+<Base title="log" description="Notes and writing by Emi Higgins.">
+  <h1>Log</h1>
+  <p>
+    Notes, newest first. <a href="/rss.xml">RSS</a>.
+  </p>
+  <EntryList rows={rows} showSummary={true} empty="No posts yet." />
+</Base>

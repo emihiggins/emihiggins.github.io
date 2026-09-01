@@ -1,0 +1,70 @@
+---
+import Base from './Base.astro';
+import { isoDate } from '../lib/entries';
+
+interface Props {
+  title: string;
+  date: Date;
+  summary: string;
+  status?: string;
+  stack?: string[];
+  links?: { label: string; url: string }[];
+  tags?: string[];
+  backHref: string;
+  backLabel: string;
+}
+
+const {
+  title,
+  date,
+  summary,
+  status,
+  stack = [],
+  links = [],
+  tags = [],
+  backHref,
+  backLabel,
+} = Astro.props;
+---
+
+<Base title={title} description={summary}>
+  <h1>{title}</h1>
+
+  <div class="meta">
+    <dl>
+      <dt>date</dt>
+      <dd><time datetime={date.toISOString()}>{isoDate(date)}</time></dd>
+
+      {status && <dt>status</dt>}
+      {status && <dd>{status}</dd>}
+
+      {stack.length > 0 && <dt>stack</dt>}
+      {stack.length > 0 && <dd>{stack.join(', ')}</dd>}
+
+      {tags.length > 0 && <dt>tags</dt>}
+      {tags.length > 0 && <dd>{tags.join(', ')}</dd>}
+
+      {links.length > 0 && <dt>links</dt>}
+      {
+        links.length > 0 && (
+          <dd>
+            {links.map((link, i) => (
+              <>
+                {i > 0 && <span aria-hidden="true"> · </span>}
+                <a href={link.url}>{link.label}</a>
+              </>
+            ))}
+          </dd>
+        )
+      }
+    </dl>
+  </div>
+
+  <hr />
+
+  <slot />
+
+  <hr />
+
+  <p><a href={backHref}>&larr; {backLabel}</a></p>
+</Base>

@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import { getIndexRows } from '../lib/entries';
+
+const rows = await getIndexRows();
+---
+
+<Base>
+  <p>
+    Hi! welcome to my site! 
+  </p>
+  <p>
+    This is an archive: side projects, random musings blog, ideas, and things I think are fun
+  </p>
+
+  <h2>Index</h2>
+
+  <EntryList rows={rows} showKind={true} showSummary={true} />
+</Base>
