@@ -21,6 +21,15 @@ const nav = [
 
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href || path.startsWith(href);
+
+/**
+ * GoatCounter site code — the `CODE` in `CODE.goatcounter.com`, from
+ * <https://www.goatcounter.com>. Set to '' to disable analytics entirely.
+ *
+ * Only loads in production builds, so `npm run dev` never inflates the counts.
+ */
+const GOATCOUNTER_CODE: string = 'emihiggins';
+const analytics = import.meta.env.PROD && GOATCOUNTER_CODE !== '';
 ---
 
 <!doctype html>
@@ -41,6 +50,18 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
+
+    {/* `is:inline` keeps Astro from bundling this; it must stay a plain remote script. */}
+    {
+      analytics && (
+        <script
+          is:inline
+          data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
+          async
+          src="https://gc.zgo.at/count.js"
+        />
+      )
+    }
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
