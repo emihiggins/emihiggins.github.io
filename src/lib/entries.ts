@@ -15,38 +15,6 @@ export async function getPosts(): Promise<CollectionEntry<'posts'>[]> {
   return (await getCollection('posts', isPublished)).sort(byDateDesc);
 }
 
-export interface IndexRow {
-  date: Date;
-  kind: 'proj' | 'log';
-  title: string;
-  href: string;
-  summary: string;
-}
-
-/** The merged homepage index: projects and log entries in one dated stream. */
-export async function getIndexRows(): Promise<IndexRow[]> {
-  const [projects, posts] = await Promise.all([getProjects(), getPosts()]);
-
-  const rows: IndexRow[] = [
-    ...projects.map((p) => ({
-      date: p.data.date,
-      kind: 'proj' as const,
-      title: p.data.title,
-      href: `/projects/${p.id}/`,
-      summary: p.data.summary,
-    })),
-    ...posts.map((p) => ({
-      date: p.data.date,
-      kind: 'log' as const,
-      title: p.data.title,
-      href: `/log/${p.id}/`,
-      summary: p.data.summary,
-    })),
-  ];
-
-  return rows.sort((a, b) => b.date.getTime() - a.date.getTime());
-}
-
 /** 2026-08 — the list format. */
 export const yearMonth = (d: Date) =>
   `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;

@@ -1,20 +1,44 @@
 ---
 import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
-import { getIndexRows } from '../lib/entries';
+import { getProjects, getPosts } from '../lib/entries';
 
-const rows = await getIndexRows();
+const RECENT = 3;
+
+const [projects, posts] = await Promise.all([getProjects(), getPosts()]);
+
+const projectRows = projects.slice(0, RECENT).map((p) => ({
+  date: p.data.date,
+  title: p.data.title,
+  href: `/projects/${p.id}/`,
+  summary: p.data.summary,
+}));
+
+const postRows = posts.slice(0, RECENT).map((p) => ({
+  date: p.data.date,
+  title: p.data.title,
+  href: `/log/${p.id}/`,
+  summary: p.data.summary,
+}));
 ---
 
 <Base>
   <p>
-    Hi! welcome to my site! 
+    Hi! welcome to my site!
   </p>
   <p>
     This is an archive: side projects, random musings blog, ideas, and things I think are fun
   </p>
 
-  <h2>Index</h2>
+  <h2>Projects</h2>
 
-  <EntryList rows={rows} showKind={true} showSummary={true} />
+  <EntryList rows={projectRows} showSummary={true} empty="No projects yet." />
+
+  {projects.length > RECENT && <a class="more" href="/projects/">all projects →</a>}
+
+  <h2>Log</h2>
+
+  <EntryList rows={postRows} showSummary={true} empty="No posts yet." />
+
+  {posts.length > RECENT && <a class="more" href="/log/">all posts →</a>}
 </Base>

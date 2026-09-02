@@ -137,6 +137,17 @@ img { max-width: 100%; height: auto; }
 
 .section-label { color: var(--dim); }
 
+/* "all projects →" link under a truncated homepage section. */
+.more {
+  display: inline-block;
+  margin-top: 0.75rem;
+  margin-left: 9ch;
+}
+
+@media (max-width: 40rem) {
+  .more { margin-left: 0; }
+}
+
 /* --- the dated entry list --- */
 
 .entries { list-style: none; margin: 0; padding: 0; }
