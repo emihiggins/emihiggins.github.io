@@ -13,6 +13,8 @@ const projects = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     status: z.enum(['active', 'shipped', 'archived']),
+    /** Which homepage section it lands in. */
+    kind: z.enum(['oss', 'side']).default('side'),
     summary: z.string(),
     stack: z.array(z.string()).default([]),
     links: z.array(linkSchema).default([]),

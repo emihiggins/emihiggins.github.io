@@ -15,6 +15,22 @@ export async function getPosts(): Promise<CollectionEntry<'posts'>[]> {
   return (await getCollection('posts', isPublished)).sort(byDateDesc);
 }
 
+/** Projects split by the `kind` frontmatter field, each still newest-first. */
+export async function getProjectsByKind() {
+  const projects = await getProjects();
+  return {
+    oss: projects.filter((p) => p.data.kind === 'oss'),
+    side: projects.filter((p) => p.data.kind === 'side'),
+  };
+}
+
+export const projectRow = (p: CollectionEntry<'projects'>) => ({
+  date: p.data.date,
+  title: p.data.title,
+  href: `/projects/${p.id}/`,
+  summary: p.data.summary,
+});
+
 /** 2026-08 — the list format. */
 export const yearMonth = (d: Date) =>
   `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;

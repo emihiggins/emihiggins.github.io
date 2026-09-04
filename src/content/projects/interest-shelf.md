@@ -2,6 +2,7 @@
 title: Interest Shelf
 date: 2026-08-31
 status: active
+kind: side
 summary: Curate what keeps you curious — publish a living link collection on your own site.
 stack:
   - Next.js

@@ -2,6 +2,7 @@
 title: claude-code-token-optimizer
 date: 2026-08-06
 status: shipped
+kind: oss
 summary: VS Code extension that finds where your Claude Code token spend goes.
 stack:
   - TypeScript

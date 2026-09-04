@@ -2,6 +2,7 @@
 title: tab-pool
 date: 2023-01-01
 status: shipped
+kind: oss
 summary: Chrome extension that groups cluttered tabs into collapsible sets.
 stack:
   - JavaScript

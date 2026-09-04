@@ -1,18 +1,26 @@
 ---
 import Base from '../../layouts/Base.astro';
 import EntryList from '../../components/EntryList.astro';
-import { getProjects } from '../../lib/entries';
+import { getProjectsByKind, projectRow } from '../../lib/entries';
 
-const rows = (await getProjects()).map((p) => ({
-  date: p.data.date,
-  title: p.data.title,
-  href: `/projects/${p.id}/`,
-  summary: p.data.summary,
-}));
+const { oss, side } = await getProjectsByKind();
 ---
 
 <Base title="projects" description="Projects Emi Higgins has built.">
   <h1>Projects</h1>
   <p>Things I've built and shipped, newest first.</p>
-  <EntryList rows={rows} showSummary={true} empty="No projects published yet." />
+
+  <h2>Open Source</h2>
+  <EntryList
+    rows={oss.map(projectRow)}
+    showSummary={true}
+    empty="No open source projects published yet."
+  />
+
+  <h2>Side Projects</h2>
+  <EntryList
+    rows={side.map(projectRow)}
+    showSummary={true}
+    empty="No side projects published yet."
+  />
 </Base>

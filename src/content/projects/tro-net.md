@@ -2,6 +2,7 @@
 title: tro-net.com
 date: 2026-07-01
 status: active
+kind: side
 summary: Scam and phishing email checker for people 60 and up.
 stack:
   - Next.js
