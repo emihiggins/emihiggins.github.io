@@ -10,17 +10,17 @@ const { oss, side } = await getProjectsByKind();
   <h1>Projects</h1>
   <p>Things I've built and shipped, newest first.</p>
 
-  <h2>Open Source</h2>
-  <EntryList
-    rows={oss.map(projectRow)}
-    showSummary={true}
-    empty="No open source projects published yet."
-  />
-
   <h2>Side Projects</h2>
   <EntryList
     rows={side.map(projectRow)}
     showSummary={true}
     empty="No side projects published yet."
+  />
+
+  <h2>Open Source</h2>
+  <EntryList
+    rows={oss.map(projectRow)}
+    showSummary={true}
+    empty="No open source projects published yet."
   />
 </Base>

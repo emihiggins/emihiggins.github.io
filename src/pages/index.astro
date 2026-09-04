@@ -26,13 +26,13 @@ const postRows = posts.slice(0, RECENT).map((p) => ({
     This is an archive: side projects, random musings blog, ideas, and things I think are fun
   </p>
 
-  <h2>Open Source</h2>
-
-  <EntryList rows={ossRows} showSummary={true} empty="No open source projects yet." />
-
   <h2>Side Projects</h2>
 
   <EntryList rows={sideRows} showSummary={true} empty="No side projects yet." />
+
+  <h2>Open Source</h2>
+
+  <EntryList rows={ossRows} showSummary={true} empty="No open source projects yet." />
 
   {(oss.length > RECENT || side.length > RECENT) && (
     <a class="more" href="/projects/">all projects →</a>
