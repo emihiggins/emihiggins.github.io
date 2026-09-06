@@ -29,6 +29,7 @@ export const projectRow = (p: CollectionEntry<'projects'>) => ({
   title: p.data.title,
   href: `/projects/${p.id}/`,
   summary: p.data.summary,
+  tags: p.data.stack,
 });
 
 /** 2026-08 — the list format. */

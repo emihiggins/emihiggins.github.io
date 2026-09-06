@@ -7,19 +7,28 @@ export interface Row {
   title: string;
   href: string;
   summary?: string;
+  /** Stack items for a project, topics for a post. Rendered as chips. */
+  tags?: string[];
 }
 
 interface Props {
   rows: Row[];
-  /** Show the [proj] / [log] column. Off for single-collection indexes. */
+  /** Show the [proj] / [log] marker next to the date. */
   showKind?: boolean;
   /** Show the one-line summary under each title. */
   showSummary?: boolean;
+  /** Show the stack/topic chips under each summary. */
+  showTags?: boolean;
   empty?: string;
 }
 
-const { rows, showKind = false, showSummary = false, empty = 'Nothing here yet.' } =
-  Astro.props;
+const {
+  rows,
+  showKind = false,
+  showSummary = false,
+  showTags = false,
+  empty = 'Nothing here yet.',
+} = Astro.props;
 ---
 
 {
@@ -28,7 +37,7 @@ const { rows, showKind = false, showSummary = false, empty = 'Nothing here yet.'
   ) : (
     <ul class="entries">
       {rows.map((row) => (
-        <li class="entry" style={!showKind ? 'grid-template-columns: 8ch 1fr' : undefined}>
+        <li class="entry">
           <span class="entry-meta">
             <time class="entry-date" datetime={row.date.toISOString()}>
               {yearMonth(row.date)}
@@ -39,6 +48,13 @@ const { rows, showKind = false, showSummary = false, empty = 'Nothing here yet.'
             <a href={row.href}>{row.title}</a>
           </span>
           {showSummary && row.summary && <span class="entry-summary">{row.summary}</span>}
+          {showTags && row.tags && row.tags.length > 0 && (
+            <ul class="entry-tags">
+              {row.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ul>

@@ -14,6 +14,7 @@ const { oss, side } = await getProjectsByKind();
   <EntryList
     rows={side.map(projectRow)}
     showSummary={true}
+    showTags={true}
     empty="No side projects published yet."
   />
 
@@ -21,6 +22,7 @@ const { oss, side } = await getProjectsByKind();
   <EntryList
     rows={oss.map(projectRow)}
     showSummary={true}
+    showTags={true}
     empty="No open source projects published yet."
   />
 </Base>

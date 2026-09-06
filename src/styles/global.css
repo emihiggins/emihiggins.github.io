@@ -152,32 +152,59 @@ img { max-width: 100%; height: auto; }
 
 .entries { list-style: none; margin: 0; padding: 0; }
 
+/* Date in a fixed gutter; title, summary and chips stack in the second column. */
 .entry {
   display: grid;
-  grid-template-columns: 8ch 7ch 1fr;
+  grid-template-columns: 8ch 1fr;
   column-gap: 1ch;
-  padding: 0.35rem 0;
-  align-items: baseline;
+  row-gap: 0.15rem;
+  padding: 0.5rem 0;
 }
+
+.entry-meta { grid-column: 1; grid-row: 1; }
+.entry-title { grid-column: 2; grid-row: 1; }
+.entry-summary { grid-column: 2; color: var(--dim); }
+.entry-tags { grid-column: 2; }
 
 .entry-date { color: var(--dim); font-variant-numeric: tabular-nums; }
 .entry-kind { color: var(--dim); }
-.entry-summary {
-  grid-column: 3;
-  color: var(--dim);
+
+/* --- stack / topic chips --- */
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.35rem;
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
 }
 
-/* Under ~40rem the three columns stack into a text block. */
+.entry-tags li {
+  margin: 0;
+  padding: 0.05em 0.45em;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--fg) 7%, transparent);
+  color: var(--dim);
+  font-size: 0.8em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Under ~40rem the gutter collapses and everything becomes one text block. */
 @media (max-width: 40rem) {
   .entry {
     grid-template-columns: 1fr;
     row-gap: 0.1rem;
     padding: 0.6rem 0;
   }
+  /* grid-row must reset too, or the pinned date and title share row 1. */
+  .entry-meta { grid-column: 1; grid-row: auto; display: block; }
+  .entry-title { grid-column: 1; grid-row: auto; }
+  .entry-summary { grid-column: 1; }
+  .entry-tags { grid-column: 1; }
   .entry-date { display: inline; }
   .entry-kind { display: inline; }
-  .entry-meta { display: block; }
-  .entry-summary { grid-column: 1; }
 }
 
 /* --- entry (single project / post) meta --- */
