@@ -7,9 +7,15 @@ interface Props {
   date: Date;
   summary: string;
   status?: string;
+  /** Blueprints only — the project being rebuilt. */
+  project?: string;
+  /** Blueprints only — rough wall-clock time to work through it. */
+  time?: string;
   stack?: string[];
   links?: { label: string; url: string }[];
   tags?: string[];
+  /** Where the original lives, if this is a copy (log posts from dev.to). */
+  canonical?: string;
   backHref: string;
   backLabel: string;
 }
@@ -19,15 +25,18 @@ const {
   date,
   summary,
   status,
+  project,
+  time,
   stack = [],
   links = [],
   tags = [],
+  canonical,
   backHref,
   backLabel,
 } = Astro.props;
 ---
 
-<Base title={title} description={summary}>
+<Base title={title} description={summary} canonical={canonical}>
   <h1>{title}</h1>
 
   <div class="meta">
@@ -37,6 +46,12 @@ const {
 
       {status && <dt>status</dt>}
       {status && <dd>{status}</dd>}
+
+      {project && <dt>rebuilds</dt>}
+      {project && <dd>{project}</dd>}
+
+      {time && <dt>time</dt>}
+      {time && <dd>{time}</dd>}
 
       {stack.length > 0 && <dt>stack</dt>}
       {stack.length > 0 && <dd>{stack.join(', ')}</dd>}

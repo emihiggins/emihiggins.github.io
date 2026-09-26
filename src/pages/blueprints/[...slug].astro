@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render, type CollectionEntry } from 'astro:content';
+import Entry from '../../layouts/Entry.astro';
+import { getBlueprints } from '../../lib/entries';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const blueprints = await getBlueprints();
+  return blueprints.map((blueprint) => ({
+    params: { slug: blueprint.id },
+    props: { blueprint },
+  }));
+};
+
+interface Props {
+  blueprint: CollectionEntry<'blueprints'>;
+}
+
+const { blueprint } = Astro.props as Props;
+const { Content } = await render(blueprint);
+---
+
+<Entry
+  title={blueprint.data.title}
+  date={blueprint.data.date}
+  summary={blueprint.data.summary}
+  project={blueprint.data.project}
+  time={blueprint.data.time}
+  stack={blueprint.data.stack}
+  links={blueprint.data.links}
+  backHref="/blueprints/"
+  backLabel="all blueprints"
+>
+  <Content />
+</Entry>

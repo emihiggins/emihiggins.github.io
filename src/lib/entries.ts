@@ -11,8 +11,13 @@ export async function getProjects(): Promise<CollectionEntry<'projects'>[]> {
   return (await getCollection('projects', isPublished)).sort(byDateDesc);
 }
 
+/** dev.to only returns published articles, so there are no drafts to filter. */
 export async function getPosts(): Promise<CollectionEntry<'posts'>[]> {
-  return (await getCollection('posts', isPublished)).sort(byDateDesc);
+  return (await getCollection('posts')).sort(byDateDesc);
+}
+
+export async function getBlueprints(): Promise<CollectionEntry<'blueprints'>[]> {
+  return (await getCollection('blueprints', isPublished)).sort(byDateDesc);
 }
 
 /** Projects split by the `kind` frontmatter field, each still newest-first. */
@@ -30,6 +35,14 @@ export const projectRow = (p: CollectionEntry<'projects'>) => ({
   href: `/projects/${p.id}/`,
   summary: p.data.summary,
   tags: p.data.stack,
+});
+
+export const blueprintRow = (b: CollectionEntry<'blueprints'>) => ({
+  date: b.data.date,
+  title: b.data.title,
+  href: `/blueprints/${b.id}/`,
+  summary: b.data.summary,
+  tags: b.data.stack,
 });
 
 /** 2026-08 — the list format. */

@@ -146,7 +146,9 @@ Astro Pages deploy fails.
 | Page loads unstyled, links dead | A `base` was added to `astro.config.mjs`, or the repo isn't named `emihiggins.github.io` |
 | `Error: Get Pages site failed` | Pages was never enabled; do step 3 |
 | Build fails, `does not match collection schema` | Bad frontmatter in a `src/content/**` Markdown file — the error names the file and field. This is intentional; malformed content fails loudly instead of rendering blank |
-| A new post doesn't appear | `draft: true` in its frontmatter. Drafts render in `npm run dev` and are stripped from production builds |
+| A new project or blueprint doesn't appear | `draft: true` in its frontmatter. Drafts render in `npm run dev` and are stripped from production builds |
+| A new log post doesn't appear | Log posts come from dev.to at build time. The deploy runs daily at 14:00 UTC; run `gh workflow run deploy.yml` to pull it sooner. Unpublished dev.to drafts never appear |
+| Build fails with `dev.to 4xx/5xx` | The dev.to API was unreachable. The build fails on purpose so the last good deploy stays live; re-run it later |
 | Build fails only in Actions | Node version drift. The workflow pins 22; match it locally with `nvm use` |
 | Pushed to a branch other than `main` | The workflow only triggers on `main` |
 

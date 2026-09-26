@@ -4,16 +4,22 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  /** Overrides the canonical URL, for pages that are copies of something published elsewhere. */
+  canonical?: string;
 }
 
-const { title, description = 'Emi Higgins — software engineer. Project archive and notes.' } =
-  Astro.props;
+const {
+  title,
+  description = 'Emi Higgins — software engineer. Project archive and notes.',
+  canonical,
+} = Astro.props;
 
 const siteName = 'emi.higgins';
 const pageTitle = title ? `${title} — ${siteName}` : siteName;
 
 const nav = [
   { href: '/projects/', label: 'projects' },
+  { href: '/blueprints/', label: 'blueprints' },
   { href: '/log/', label: 'log' },
   { href: '/about/', label: 'about' },
   { href: '/now/', label: 'now' },
@@ -40,7 +46,7 @@ const analytics = import.meta.env.PROD && GOATCOUNTER_CODE !== '';
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="canonical" href={canonical ?? new URL(path, Astro.site)} />
     <link
       rel="alternate"
       type="application/rss+xml"

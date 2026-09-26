@@ -135,6 +135,15 @@ blockquote {
 
 img { max-width: 100%; height: auto; }
 
+/* dev.to post bodies: drop the copy/fullscreen panels its code blocks carry, which
+   only work with dev.to's own JS. */
+.devto-body .highlight__panel { display: none; }
+.devto-body .table-wrapper-paragraph { overflow-x: auto; margin-bottom: 1rem; }
+.devto-body table { border-collapse: collapse; margin: 0; }
+.devto-body th,
+.devto-body td { border: 1px solid var(--rule); padding: 0.25rem 1ch; text-align: left; vertical-align: top; }
+.devto-body iframe { max-width: 100%; border: 1px solid var(--rule); }
+
 .section-label { color: var(--dim); }
 
 /* "all projects →" link under a truncated homepage section. */

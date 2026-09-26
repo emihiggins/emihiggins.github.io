@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { getBlueprints, blueprintRow } from '../../lib/entries';
+
+const rows = (await getBlueprints()).map(blueprintRow);
+---
+
+<Base title="blueprints" description="Step-by-step guides to rebuilding things Emi Higgins has built.">
+  <h1>Blueprints</h1>
+  <p>Guides to rebuilding things I've built, newest first. Each one is the real path, including the parts that didn't work.</p>
+  <EntryList rows={rows} showSummary={true} showTags={true} empty="No blueprints published yet." />
+</Base>

@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import EntryList from '../../components/EntryList.astro';
 import { getPosts } from '../../lib/entries';
+import { DEV_PROFILE_URL } from '../../lib/devto';
 
 const rows = (await getPosts()).map((p) => ({
   date: p.data.date,
@@ -14,7 +15,8 @@ const rows = (await getPosts()).map((p) => ({
 <Base title="log" description="Notes and writing by Emi Higgins.">
   <h1>Log</h1>
   <p>
-    Notes, newest first. <a href="/rss.xml">RSS</a>.
+    Notes, newest first. Written on <a href={DEV_PROFILE_URL}>dev.to</a>.
+    <a href="/rss.xml">RSS</a>.
   </p>
   <EntryList rows={rows} showSummary={true} empty="No posts yet." />
 </Base>

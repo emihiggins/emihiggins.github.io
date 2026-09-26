@@ -25,8 +25,13 @@ const { Content } = await render(post);
   date={post.data.date}
   summary={post.data.summary}
   tags={post.data.tags}
+  links={[{ label: 'dev.to', url: post.data.url }]}
+  canonical={post.data.canonical}
   backHref="/log/"
   backLabel="all posts"
 >
-  <Content />
+  <div class="devto-body">
+    <Content />
+  </div>
+  <p><a href={post.data.url}>Comments and reactions on dev.to &rarr;</a></p>
 </Entry>

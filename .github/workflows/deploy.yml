@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # The log is pulled from dev.to at build time; rebuild daily to pick up new posts.
+  schedule:
+    - cron: '0 14 * * *'
 
 permissions:
   contents: read
