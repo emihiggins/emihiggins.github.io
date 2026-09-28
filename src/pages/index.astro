@@ -5,9 +5,10 @@ import { getProjectsByKind, getPosts, projectRow } from '../lib/entries';
 
 const RECENT = 3;
 
-const [{ oss, side }, posts] = await Promise.all([getProjectsByKind(), getPosts()]);
+const [{ oss, research, side }, posts] = await Promise.all([getProjectsByKind(), getPosts()]);
 
 const ossRows = oss.slice(0, RECENT).map(projectRow);
+const researchRows = research.slice(0, RECENT).map(projectRow);
 const sideRows = side.slice(0, RECENT).map(projectRow);
 
 const postRows = posts.slice(0, RECENT).map((p) => ({
@@ -37,6 +38,17 @@ const postRows = posts.slice(0, RECENT).map((p) => ({
 
   <h2>Open Source</h2>
 
+  <h3 class="subsection">Research &amp; Tools</h3>
+
+  <EntryList
+    rows={researchRows}
+    showSummary={true}
+    showTags={true}
+    empty="No research yet."
+  />
+
+  <h3 class="subsection">Projects</h3>
+
   <EntryList
     rows={ossRows}
     showSummary={true}
@@ -44,7 +56,7 @@ const postRows = posts.slice(0, RECENT).map((p) => ({
     empty="No open source projects yet."
   />
 
-  {(oss.length > RECENT || side.length > RECENT) && (
+  {(oss.length > RECENT || research.length > RECENT || side.length > RECENT) && (
     <a class="more" href="/projects/">all projects →</a>
   )}
 

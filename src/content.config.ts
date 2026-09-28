@@ -14,8 +14,11 @@ const projects = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     status: z.enum(['active', 'shipped', 'archived']),
-    /** Which homepage section it lands in. */
-    kind: z.enum(['oss', 'side']).default('side'),
+    /**
+     * Which section it lands in. `oss` and `research` are the two halves of
+     * Open Source: things I've built, and research/tools like benchmarks.
+     */
+    kind: z.enum(['oss', 'research', 'side']).default('side'),
     summary: z.string(),
     stack: z.array(z.string()).default([]),
     links: z.array(linkSchema).default([]),

@@ -25,6 +25,7 @@ export async function getProjectsByKind() {
   const projects = await getProjects();
   return {
     oss: projects.filter((p) => p.data.kind === 'oss'),
+    research: projects.filter((p) => p.data.kind === 'research'),
     side: projects.filter((p) => p.data.kind === 'side'),
   };
 }

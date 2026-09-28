@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import EntryList from '../../components/EntryList.astro';
 import { getProjectsByKind, projectRow } from '../../lib/entries';
 
-const { oss, side } = await getProjectsByKind();
+const { oss, research, side } = await getProjectsByKind();
 ---
 
 <Base title="projects" description="Projects Emi Higgins has built.">
@@ -19,6 +19,16 @@ const { oss, side } = await getProjectsByKind();
   />
 
   <h2>Open Source</h2>
+
+  <h3 class="subsection">Research &amp; Tools</h3>
+  <EntryList
+    rows={research.map(projectRow)}
+    showSummary={true}
+    showTags={true}
+    empty="No research published yet."
+  />
+
+  <h3 class="subsection">Projects</h3>
   <EntryList
     rows={oss.map(projectRow)}
     showSummary={true}
